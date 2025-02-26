@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../api/dio_client.dart';
 import 'models/login_user_dto.dart';
@@ -19,7 +20,8 @@ class AuthService extends _$AuthService {
         data: loginData.toJson(),
       );
       return SignedUserDTO.fromJson(response.data);
-    } on DioException catch (e) {
+    } on DioException catch (e,trace) {
+      debugPrintStack(stackTrace: trace);
       if (e.response?.statusCode == 409) {
         throw 'Invalid email or password';
       }

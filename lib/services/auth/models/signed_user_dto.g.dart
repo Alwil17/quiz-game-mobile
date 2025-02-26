@@ -9,10 +9,10 @@ part of 'signed_user_dto.dart';
 _$SignedUserDTOImpl _$$SignedUserDTOImplFromJson(Map<String, dynamic> json) =>
     _$SignedUserDTOImpl(
       id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      email: json['email'] as String,
-      accessToken: json['accessToken'] as String,
-      role: json['role'] as String,
+      name: (json['name']??"") as String,
+      email: (json['email']??"") as String,
+      accessToken: (json['accessToken']??"") as String,
+      role: (json['role']??"") as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: json['updatedAt'] == null
           ? null

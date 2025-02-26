@@ -10,7 +10,7 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF272052),
+      backgroundColor: const Color(0xFF272052),
       body: Stack(
         children: [
           Container(
@@ -23,9 +23,9 @@ class Onboarding extends StatelessWidget {
                   AppTheme.of(context).error,
                   AppTheme.of(context).tertiary
                 ],
-                stops: [0, 0.5, 1],
-                begin: AlignmentDirectional(-1, -1),
-                end: AlignmentDirectional(1, 1),
+                stops: const [0, 0.5, 1],
+                begin: const AlignmentDirectional(-1, -1),
+                end: const AlignmentDirectional(1, 1),
               ),
             ),
             child: Container(
@@ -34,25 +34,25 @@ class Onboarding extends StatelessWidget {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color(0x00FFFFFF),
+                    const Color(0x00FFFFFF),
                     AppTheme.of(context).secondaryBackground
                   ],
-                  stops: [0, 1],
-                  begin: AlignmentDirectional(0, -1),
-                  end: AlignmentDirectional(0, 1),
+                  stops: const [0, 1],
+                  begin: const AlignmentDirectional(0, -1),
+                  end: const AlignmentDirectional(0, 1),
                 ),
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(18, 0, 18, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(18, 0, 18, 0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 210, 0, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 210, 0, 0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.asset(
@@ -82,7 +82,7 @@ class Onboarding extends StatelessWidget {
                               ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                           child: RichText(
                             textScaler: MediaQuery.of(context).textScaler,
                             text: TextSpan(
@@ -93,7 +93,7 @@ class Onboarding extends StatelessWidget {
                                       .textTheme
                                       .headlineMedium
                                       ?.copyWith(
-                                        color: Color(0xFF3C4751),
+                                        color: const Color(0xFF3C4751),
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -114,7 +114,7 @@ class Onboarding extends StatelessWidget {
                                       .textTheme
                                       .headlineMedium
                                       ?.copyWith(
-                                        color: Color(0xFF3C4751),
+                                        color: const Color(0xFF3C4751),
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
                                       ),
@@ -124,7 +124,7 @@ class Onboarding extends StatelessWidget {
                                   .textTheme
                                   .headlineLarge
                                   ?.copyWith(
-                                    color: Color(0xFFE0E3E7),
+                                    color: const Color(0xFFE0E3E7),
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -133,12 +133,12 @@ class Onboarding extends StatelessWidget {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                       child: Text(
                         'Jouez, apprenez et explorez avec des quiz passionnants !',
                         style:
                             Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  color: Color(0xFF3C4751),
+                                  color: const Color(0xFF3C4751),
                                   letterSpacing: 0.0,
                                 ),
                       ),
@@ -153,11 +153,11 @@ class Onboarding extends StatelessWidget {
                         borderRadius: BorderRadius.circular(18),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFFDEDEE1),
+                            color: const Color(0xFFDEDEE1),
                             borderRadius: BorderRadius.circular(18),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 6),
+                            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 6),
                             child: ElevatedButton(
                               onPressed: () async {
                                 Navigator.pushNamed(
@@ -166,11 +166,11 @@ class Onboarding extends StatelessWidget {
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppTheme.of(context).buttonBackground,
                                 elevation: 0,
-                                padding: EdgeInsets.all(22),
+                                padding: const EdgeInsets.all(22),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18),
                                 ),
-                                minimumSize: Size(double.infinity, 0),
+                                minimumSize: const Size(double.infinity, 0),
                               ),
                               child: Text(
                                 'Commencer',
@@ -187,12 +187,12 @@ class Onboarding extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(height: 12)),
+                  ].divide(const SizedBox(height: 12)),
                 ),
               ]
-                  .divide(SizedBox(height: 12))
-                  .addToStart(SizedBox(height: 30))
-                  .addToEnd(SizedBox(height: 30)),
+                  .divide(const SizedBox(height: 12))
+                  .addToStart(const SizedBox(height: 30))
+                  .addToEnd(const SizedBox(height: 30)),
             ),
           ),
         ],

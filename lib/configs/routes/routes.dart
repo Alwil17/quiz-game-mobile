@@ -5,6 +5,6 @@ import 'package:quiz_game_mobile/pages/onboarding.dart';
 
 
 Map<String, WidgetBuilder> appRoutes = {
-  AppViewsPaths.onboarding: (context) => Onboarding(),
-  AppViewsPaths.login: (context) => Login(),
+  AppViewsPaths.onboarding: (context) => const Onboarding(),
+  AppViewsPaths.login: (context) => const Login(),
 };

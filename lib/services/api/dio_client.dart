@@ -7,7 +7,7 @@ part 'dio_client.g.dart';
 Dio dio(DioRef ref) {
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'http://localhost:3000', // Update with your API base URL
+      baseUrl: 'https://sapientia-quiz-game-api.vercel.app', // Update with your API base URL
       contentType: 'application/json',
       responseType: ResponseType.json,
     ),
