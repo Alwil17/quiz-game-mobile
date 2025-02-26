@@ -5,7 +5,7 @@ import 'package:quiz_game_mobile/configs/routes/paths.dart';
 import '../configs/app_theme.dart';
 
 class Onboarding extends StatelessWidget {
-  const Onboarding({super.key});
+  const Onboarding({super.key}); 
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +164,7 @@ class Onboarding extends StatelessWidget {
                                     context, AppViewsPaths.login);
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Color(0xFFAF7EE7),
+                                backgroundColor: AppTheme.of(context).buttonBackground,
                                 elevation: 0,
                                 padding: EdgeInsets.all(22),
                                 shape: RoundedRectangleBorder(

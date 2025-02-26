@@ -21,4 +21,6 @@ class AppTheme {
   late Color warning = const Color(0xFFF9CF58);
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
+  late Color buttonBackground = const Color(0xFFAF7EE7);
+  
 }
