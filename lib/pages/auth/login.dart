@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:quiz_game_mobile/configs/app_animations.dart';
+import 'package:quiz_game_mobile/configs/app_extension.dart';
 import 'package:quiz_game_mobile/configs/app_theme.dart';
 import 'package:quiz_game_mobile/configs/routes/paths.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
 
-  static String routeName = 'Login';
-  static String routePath = '/login';
-
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> with TickerProviderStateMixin {
-  late LoginModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final animationsMap = <String, AnimationInfo>{};
 
+  // Text Controllers
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  // Focus Nodes
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+
+  // Password visibility
+  bool passwordVisible = false;
+
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginModel());
-
-    _model.emailAddressTextController ??= TextEditingController();
-    _model.emailAddressFocusNode ??= FocusNode();
-
-    _model.passwordTextController ??= TextEditingController();
-    _model.passwordFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -122,8 +125,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _model.dispose();
-
+    emailController.dispose();
+    passwordController.dispose();
+    emailFocusNode.dispose();
+    passwordFocusNode.dispose();
     super.dispose();
   }
 
@@ -228,11 +233,11 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         child: TextFormField(
-                          controller: _model.emailAddressTextController,
-                          focusNode: _model.emailAddressFocusNode,
+                          controller: emailController,
+                          focusNode: emailFocusNode,
                           autofocus: true,
                           autofillHints: [AutofillHints.email],
                           obscureText: false,
@@ -283,22 +288,20 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                     letterSpacing: 0.0,
                                   ),
                           keyboardType: TextInputType.emailAddress,
-                          validator: _model.emailAddressTextControllerValidator
-                              .asValidator(context),
                         ),
                       ),
                     ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         child: TextFormField(
-                          controller: _model.passwordTextController,
-                          focusNode: _model.passwordFocusNode,
+                          controller: passwordController,
+                          focusNode: passwordFocusNode,
                           autofocus: false,
                           autofillHints: [AutofillHints.password],
-                          obscureText: !_model.passwordVisibility,
+                          obscureText: !passwordVisible,
                           decoration: InputDecoration(
                             labelText: 'Mot de passe',
                             labelStyle: Theme.of(context)
@@ -341,12 +344,11 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                             contentPadding: EdgeInsets.all(24.0),
                             suffixIcon: InkWell(
                               onTap: () => safeSetState(
-                                () => _model.passwordVisibility =
-                                    !_model.passwordVisibility,
+                                () => passwordVisible = !passwordVisible,
                               ),
                               focusNode: FocusNode(skipTraversal: true),
                               child: Icon(
-                                _model.passwordVisibility
+                                passwordVisible
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
                                 color: AppTheme.of(context).secondaryText,
@@ -359,8 +361,6 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
-                          validator: _model.passwordTextControllerValidator
-                              .asValidator(context),
                         ),
                       ),
                     ),
