@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quiz_game_mobile/configs/app_animations.dart';
 import 'package:quiz_game_mobile/configs/app_extension.dart';
 import 'package:quiz_game_mobile/configs/app_theme.dart';
 import 'package:quiz_game_mobile/configs/routes/paths.dart';
+import 'package:quiz_game_mobile/services/auth/auth_service.dart';
+import 'package:quiz_game_mobile/services/auth/models/login_user_dto.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key}); 
+class Login extends ConsumerStatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  ConsumerState<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> with TickerProviderStateMixin {
+class _LoginState extends ConsumerState<Login> with TickerProviderStateMixin {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -49,8 +52,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             curve: Curves.bounceOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: Offset(0.6, 1.0),
-            end: Offset(1.0, 1.0),
+            begin: const Offset(0.6, 1.0),
+            end: const Offset(1.0, 1.0),
           ),
         ],
       ),
@@ -69,8 +72,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             curve: Curves.easeInOut,
             delay: 100.0.ms,
             duration: 400.0.ms,
-            begin: Offset(0.0, 30.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -89,8 +92,8 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             curve: Curves.easeInOut,
             delay: 150.0.ms,
             duration: 400.0.ms,
-            begin: Offset(0.0, 30.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 30.0),
+            end: const Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -108,15 +111,15 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 400.0.ms,
-            begin: Offset(0.0, 60.0),
-            end: Offset(0.0, 0.0),
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
           ),
           TiltEffect(
             curve: Curves.easeInOut,
             delay: 200.0.ms,
             duration: 400.0.ms,
-            begin: Offset(-0.349, 0),
-            end: Offset(0, 0),
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
           ),
         ],
       ),
@@ -130,6 +133,39 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     super.dispose();
+  }
+
+  void _handleLogin() async {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter both email and password'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    try {
+      final loginData = LoginUserDTO(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      await ref.read(authServiceProvider.notifier).login(loginData);
+      if (mounted) {
+        Navigator.pushNamed(context, AppViewsPaths.home);
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -152,9 +188,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [AppTheme.of(context).primary, AppTheme.of(context).error, AppTheme.of(context).tertiary],
-                    stops: [0.0, 0.5, 1.0],
-                    begin: AlignmentDirectional(-1.0, -1.0),
-                    end: AlignmentDirectional(1.0, 1.0),
+                    stops: const [0.0, 0.5, 1.0],
+                    begin: const AlignmentDirectional(-1.0, -1.0),
+                    end: const AlignmentDirectional(1.0, 1.0),
                   ),
                 ),
                 child: Container(
@@ -162,10 +198,10 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                   height: 100.0,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Color(0x00FFFFFF), AppTheme.of(context).secondaryBackground],
-                      stops: [0.0, 1.0],
-                      begin: AlignmentDirectional(0.0, -1.0),
-                      end: AlignmentDirectional(0, 1.0),
+                      colors: [const Color(0x00FFFFFF), AppTheme.of(context).secondaryBackground],
+                      stops: const [0.0, 1.0],
+                      begin: const AlignmentDirectional(0.0, -1.0),
+                      end: const AlignmentDirectional(0, 1.0),
                     ),
                   ),
                   child: Column(
@@ -180,7 +216,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(16.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(12.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
@@ -195,7 +231,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                           animationsMap['containerOnPageLoadAnimation']!),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                         child: Text(
                           'Se connecter',
                           style:
@@ -208,7 +244,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                         child: Text(
                           'Entrez les identifiants de votre compte',
                           style:
@@ -224,23 +260,23 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: SizedBox(
                           width: double.infinity,
                           child: TextFormField(
                             controller: emailController,
                             focusNode: emailFocusNode,
                             autofocus: true,
-                            autofillHints: [AutofillHints.email],
+                            autofillHints: const [AutofillHints.email],
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Email',
@@ -281,7 +317,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                               ),
                               filled: true,
                               fillColor: AppTheme.of(context).secondaryBackground,
-                              contentPadding: EdgeInsets.all(24.0),
+                              contentPadding: const EdgeInsets.all(24.0),
                             ),
                             style:
                                 Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -294,14 +330,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                         child: SizedBox(
                           width: double.infinity,
                           child: TextFormField(
                             controller: passwordController,
                             focusNode: passwordFocusNode,
                             autofocus: false,
-                            autofillHints: [AutofillHints.password],
+                            autofillHints: const [AutofillHints.password],
                             obscureText: !passwordVisible,
                             decoration: InputDecoration(
                               labelText: 'Mot de passe',
@@ -342,7 +378,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                               ),
                               filled: true,
                               fillColor: AppTheme.of(context).secondaryBackground,
-                              contentPadding: EdgeInsets.all(24.0),
+                              contentPadding: const EdgeInsets.all(24.0),
                               suffixIcon: InkWell(
                                 onTap: () => safeSetState(
                                   () => passwordVisible = !passwordVisible,
@@ -375,24 +411,22 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                           borderRadius: BorderRadius.circular(18.0),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Color(0xFFDEDEE1),
+                              color: const Color(0xFFDEDEE1),
                               borderRadius: BorderRadius.circular(18.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 6.0),
                               child: ElevatedButton(
-                                onPressed: () async {
-                                  Navigator.pushNamed(context, AppViewsPaths.home);
-                                },
+                                onPressed: _handleLogin,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: AppTheme.of(context).buttonBackground,
                                   elevation: 0,
-                                  padding: EdgeInsets.all(22.0),
+                                  padding: const EdgeInsets.all(22.0),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                   ),
-                                  minimumSize: Size(double.infinity, 0),
+                                  minimumSize: const Size(double.infinity, 0),
                                 ),
                                 child: Text(
                                   'Connection',
@@ -408,9 +442,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 16.0, 0.0, 16.0),
                           child: ElevatedButton(
                             onPressed: () async {
@@ -419,7 +453,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppTheme.of(context).secondaryBackground,
                               elevation: 0,
-                              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 side: BorderSide(
@@ -427,7 +461,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   width: 2.0,
                                 ),
                               ),
-                              minimumSize: Size(230.0, 44.0),
+                              minimumSize: const Size(230.0, 44.0),
                             ),
                             child: Text(
                               'Créer un compte',
@@ -440,9 +474,9 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 16.0, 0.0, 16.0),
                           child: ElevatedButton(
                             onPressed: () async {
@@ -451,7 +485,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppTheme.of(context).secondaryBackground,
                               elevation: 0,
-                              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12.0),
                                 side: BorderSide(
@@ -459,7 +493,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                                   width: 2.0,
                                 ),
                               ),
-                              minimumSize: Size(230.0, 44.0),
+                              minimumSize: const Size(230.0, 44.0),
                             ),
                             child: Text(
                               'Mot de passe oublié',
