@@ -1,7 +1,7 @@
 class AppViewsPaths {
-  static const login = 'login';
-  static const register = 'register';
-  static const forgotPassword = 'forgot-password';
-  static const onboarding = 'onboarding';
-  static const home = 'home';
+  static const String onboarding = 'onboarding';
+  static const String login = 'login';
+  static const String register = 'register';
+  static const String home = 'home';
+  static const String forgotPassword = 'forgot-password';
 }
