@@ -1,6 +1,8 @@
 // ignore_for_file: unused_import
 
 // import '/components/multiplayer_type_choice_widget.dart';
+import 'package:quiz_game_mobile/components/multiplayer_type_choice_widget.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -238,7 +240,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   },
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    // child: const MultiplayerTypeChoiceWidget(), // means the component MultiplayerTypeChoice should be created
+                                    child:
+                                        const MultiplayerTypeChoiceWidget(), // means the component MultiplayerTypeChoice should be created
                                   ),
                                 );
                               },

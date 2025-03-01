@@ -279,7 +279,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    // context.pushNamed(EditPasswordWidget.routeName);
+                    context.pushNamed(EditPasswordWidget.routeName);
                   },
                   child: Container(
                     width: double.infinity,
@@ -343,7 +343,7 @@ class _ProfilWidgetState extends State<ProfilWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    // context.pushNamed(EditProfilWidget.routeName);
+                    context.pushNamed(EditProfilWidget.routeName);
                   },
                   child: Container(
                     width: double.infinity,

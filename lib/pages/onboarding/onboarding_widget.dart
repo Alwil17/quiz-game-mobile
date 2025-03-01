@@ -85,15 +85,16 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 210.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 210.0, 0.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
@@ -175,8 +176,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                         ],
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 30.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 0.0, 30.0),
                         child: Text(
                           'Jouez, apprenez et explorez avec des quiz passionnants !',
                           style:
@@ -211,8 +212,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                 options: FFButtonOptions(
                                   width: double.infinity,
                                   padding: const EdgeInsets.all(22.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: const Color(0xFFAF7EE7),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
