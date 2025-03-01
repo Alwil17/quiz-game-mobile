@@ -627,7 +627,7 @@ packages:
     source: hosted
     version: "6.3.0"
   url_launcher_android:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: url_launcher_android
       sha256: e35a698ac302dd68e41f73250bd9517fe3ab5fa4f18fe4647a0872db61bacbab

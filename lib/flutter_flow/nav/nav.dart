@@ -91,7 +91,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : const ProfilWidget(),
         ),
 
-        // EditProfilWidget, EditPasswordWidget will be added here by BB
+        //EditProfilWidget, EditPasswordWidget will be added here by BB
+        FFRoute(
+          name: EditProfilWidget.routeName,
+          path: EditProfilWidget.routePath,
+          builder: (context, params) => const EditProfilWidget(),
+        ),
+        FFRoute(
+          name: EditPasswordWidget.routeName,
+          path: EditPasswordWidget.routePath,
+          builder: (context, params) => const EditPasswordWidget(),
+        ),
 
         // the others pages that concerned questions will be added here too by TL
 
